@@ -23,7 +23,7 @@ function setMonths(elem) {
 }
 
 function setYears(elem, currentYear) {
-	for (let i = currentYear - 100; i <= currentYear; i += 1) {
+	for (let i = currentYear; i >= currentYear - 100; i -= 1) {
   	const option = createOption(i);
 		elem.append(option);
   }
@@ -37,22 +37,26 @@ function createOption(i) {
 	return option;
 };
 
-
 function updateDays() {
 	const daysSelect = document.querySelector('#days');
 	const month = document.querySelector('#months').value;
 	const year = document.querySelector('#years').value;
-	const selectOption = document.querySelector('option[disabled]').cloneNode(true);
+	const firstOption = document.querySelector('option[disabled]').cloneNode(true);
+
+	const selectedDay = daysSelect.options[daysSelect.selectedIndex].value;
 	const daysInMonth = moment(`${year}-${month}`, "YYYY-MM").daysInMonth();
+
+	debugger;
 
 	while(daysSelect.firstElementChild) {
 		daysSelect.firstElementChild.remove();
 	}
 
-	daysSelect.appendChild(selectOption);
+	daysSelect.appendChild(firstOption);
 
 	setDays(daysSelect, daysInMonth);
-};
 
+	//daysSelect.options[daysSelect.selectedIndex].innerText = selectedDay;
+};
 
 init();
