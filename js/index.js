@@ -46,8 +46,6 @@ function updateDays() {
 	const selectedDay = daysSelect.options[daysSelect.selectedIndex].value;
 	const daysInMonth = moment(`${year}-${month}`, "YYYY-MM").daysInMonth();
 
-	debugger;
-
 	while(daysSelect.firstElementChild) {
 		daysSelect.firstElementChild.remove();
 	}
@@ -55,6 +53,17 @@ function updateDays() {
 	daysSelect.appendChild(firstOption);
 
 	setDays(daysSelect, daysInMonth);
+
+	document.querySelectorAll('#days').forEach((option) => {
+		console.log(option.innerText, selectedDay);
+
+		if (option.innerText === selectedDay) {
+			debugger;
+			option.setAttribute('selected', true);
+		}
+
+		daysSelect.options[daysSelect.selectedIndex]
+	});
 
 	//daysSelect.options[daysSelect.selectedIndex].innerText = selectedDay;
 };
